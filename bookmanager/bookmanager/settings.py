@@ -14,6 +14,7 @@ import os
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+#代表的是 主项目bookmanager的位置
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -24,9 +25,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%#0%phu1gt976@ow8%-(0rrt26te1elqc1+0etl_mi9d8!*v+1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# 开发的时候用TRUE，运行的时候改为false
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#允许通过什么样的形式访问，默认是127.0.0.1,"*"代表什么形式都可以
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'book',
+    #代表两种子应用的注册方式
+    # 'book',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'bookmanager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],####
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,4 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+#配置静态资源
 STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+]

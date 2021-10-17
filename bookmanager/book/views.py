@@ -8,4 +8,8 @@ from django.shortcuts import render
 """
 from django.http import HttpResponse
 def index(request):
-    return render(request,'book/index.html')
+    #render 函数为渲染模版的函数 实际返回的也是httpsponse
+
+    #模拟从数据库查找的函数
+    context = {'name':'马上双11，点击有惊喜'}
+    return render(request,'book/index.html',context=context)
