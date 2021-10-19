@@ -41,7 +41,7 @@ class PeopleInfo(models.Model):
     gender = models.SmallIntegerField(choices=gender_choice,default=1)
     description = models.CharField(max_length=100,null=True)
     is_delete = models.BooleanField(default=False)
-    
+
 
     #外键
     #系统会自动为外键 添加 _id
