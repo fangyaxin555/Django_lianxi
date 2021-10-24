@@ -37,16 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'book',
+    'person',
 ]
-
+#中间件的设置 中间件相当于对django添加新的功能，提高代码的健壮性
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'book.middleware.TestMiddleWare',
 ]
 
 ROOT_URLCONF = 'bookmanger03.urls'
@@ -75,8 +78,13 @@ WSGI_APPLICATION = 'bookmanger03.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST':'127.0.0.1',
+        'PORT':3306,
+        'USER':'root',
+        'PASSWORD':'fangyaxin555',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME':'book_03',
     }
 }
 
@@ -118,3 +126,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#############SESSION的redis配置###################
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',#1代表使用那个数据库
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+#使用的是哪个数据库
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+#使用的是什么配置信息
+SESSION_CACHE_ALIAS = 'default'
